@@ -824,9 +824,9 @@ void print_latex_node(GString *out, node *n, scratch_pad *scratch) {
 			break;
 		case TABLE:
 			pad(out, 2, scratch);
-			g_string_append_printf(out, "\\begin{table}[htbp]\n\\begin{minipage}{\\linewidth}\n\\setlength{\\tymax}{0.5\\linewidth}\n\\centering\n\\small\n");
+			g_string_append_printf(out, "\\begin{table}[htbp]\n\\setlength{\\tymax}{0.5\\linewidth}\n\\centering\n\\small\n");
 			print_latex_node_tree(out, n->children, scratch);
-			g_string_append_printf(out, "\n\\end{tabulary}\n\\end{minipage}\n\\end{table}");
+			g_string_append_printf(out, "\n\\end{tabulary}\n\\end{table}");
 			scratch->padded = 0;
 			break;
 		case TABLESEPARATOR:
