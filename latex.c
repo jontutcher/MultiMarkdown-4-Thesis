@@ -203,12 +203,16 @@ void print_latex_node(GString *out, node *n, scratch_pad *scratch) {
 			break;
 		case METADATA:
 			/* print the metadata */
+			g_string_append_printf(out, "%%%% BEGIN MMD METADATA ------------------------------------------------\n\n");
 			print_latex_node_tree(out,n->children, scratch);
 			if (!(scratch->extensions & EXT_SNIPPET) && (is_latex_complete_doc(n))) {
 				scratch->extensions = scratch->extensions | EXT_COMPLETE;
 			}
+			g_string_append_printf(out, "\n%%%% END MMD METADATA --------------------------------------------------\n\n");
 			/* print acronym definitions */
+			g_string_append_printf(out, "%%%% BEGIN ACRONYM DEFINITIONS -----------------------------------------\n\n");
 			print_latex_node_tree(out, scratch->abbreviations, scratch);
+			g_string_append_printf(out, "\n%%%% END ACRONYM DEFINITIONS -------------------------------------------\n\n");
 			break;
 		case METAKEY:
 			/* reformat the key */
@@ -824,7 +828,7 @@ void print_latex_node(GString *out, node *n, scratch_pad *scratch) {
 			break;
 		case TABLE:
 			pad(out, 2, scratch);
-			g_string_append_printf(out, "\\begin{table}[htbp]\n\\setlength{\\tymax}{0.5\\linewidth}\n\\centering\n\\small\n");
+			g_string_append_printf(out, "\\begin{table}[htbp]\n\\centering\n\\small\n");
 			print_latex_node_tree(out, n->children, scratch);
 			g_string_append_printf(out, "\n\\end{tabulary}\n\\end{table}");
 			scratch->padded = 0;
