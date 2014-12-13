@@ -168,7 +168,7 @@ void print_latex_node(GString *out, node *n, scratch_pad *scratch) {
 				trim_trailing_whitespace(n->children->str);
 				if (strlen(n->children->str) > 0) {
 					//use minted package rather than lstlisting for code listing
-					g_string_append_printf(out, "\\begin{minted}{%s}\n%s\\end{minted}", n->children->str,n->str);
+					g_string_append_printf(out, "\\begin{mdframed}\n\\begin{minted}{%s}\n%s\\end{minted}\n\\end{mdframed}", n->children->str,n->str);
 					// g_string_append_printf(out, "\\begin{lstlisting}[language=%s]\n%s\\end{lstlisting}", n->children->str,n->str);
 					scratch->padded = 0;
 					break;
